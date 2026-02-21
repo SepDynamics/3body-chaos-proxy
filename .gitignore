@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+venv/
+env/
+.env
+
+# C++ Build
+build/
+*.so
+*.o
+
+# LaTeX
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.blg
+paper/*.bbl
+paper/*.synctex.gz
+paper/*.fls
+paper/*.fdb_latexmk
