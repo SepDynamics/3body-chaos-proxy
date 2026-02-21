@@ -1,6 +1,6 @@
-# Symbolic Chaos Proxy for N-Body Prediction
+# Symbolic Chaos Proxy for the 3-Body Problem
 
-This standalone package implements the underlying symbolic dynamics that reliably predict chaotic ejection in the N-Body problem, achieving a strong **r = 0.811** Pearson correlation with the mathematically rigorous Local Lyapunov Exponent (LLE).
+This standalone package implements the underlying symbolic dynamics that reliably predict chaotic ejection in the 3-Body problem, achieving a strong **r = 0.811** Pearson correlation with the mathematically rigorous Local Lyapunov Exponent (LLE).
 
 ## 1. Physical Signal Extraction: Kinetic Energy Variance
 Instead of tracking raw spatial coordinates or distances, this system tracks the **Rolling Variance of the Total Kinetic Energy**:
@@ -15,7 +15,7 @@ $$S(t) = \ln(1 + \sigma_K^2(t))$$
 The continuous, normalized analog signal $S_{norm}(t)$ is fed into a pure 1-bit Delta-Sigma Modulator. This produces a binary temporal sequence where the density of `1`s tracks the average fluctuation strength, and consecutive runs of `1`s directly identify persistent high-fluctuation episodes.
 
 ## 3. Symbolic Dynamics (C++ Kernel)
-The Python physics simulation passes sliding discrete windows into the optimized `chaos_proxy` C++ module. The kernel models the structural stability by analyzing state transitions identically mapped to physical stability constraints. 
+The Python physics simulation passes sliding discrete windows into the optimized `chaos_proxy` C++ module. The kernel models the structural stability by analyzing state transitions statistically mapped to physical stability constraints. 
 
 For 3-body physics, the meaningful operational states are:
 * `LOW_FLUCTUATION`: The sequence generated low event activity, confirming an energetically calm period.
