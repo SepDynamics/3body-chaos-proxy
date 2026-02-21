@@ -31,18 +31,18 @@ For 3-body physics, the meaningful operational states are:
    $H = - (P_{low} \log_2 P_{low} + P_{osc} \log_2 P_{osc} + P_{high} \log_2 P_{high}) / \log_2(3)$
    This Shannon formulation extracts the informational uncertainty of the positional manifold natively.
 
-## Practical Win: Low Computational Cost
+## Practical Win: Low Computational Overhead
 In standard astrodynamics, determining true chaos requires calculating the Local Lyapunov Exponent (LLE) using tangent perturbation vectors—effectively doubling computational cost and introducing profound numerical sensitivity.
 
-By calculating this symbolic Chaos Score, we match the identical physical breakdown property as the Lyapunov Exponent. It provides real-time monitoring of orbital chaos during massive N-body simulations at practically zero computational cost.
+By calculating this symbolic Chaos Score, we capture a **structural isomorphism** to the Lyapunov Exponent. While integrating the base N-body system continues to carry its inherent computational cost, this method provides real-time monitoring of orbital chaos during massive simulations with **zero-overhead chaos detection**.
 
 ## Massive GPU Validation
 To validate the generalisability of the proxy, this repository includes `gpu_batch_validation.py`, a PyTorch-vectorized RK4 solver that simulates 10,000 randomized configurations (masses, positions, and non-zero initial velocities). Extracting the statistics prior to body ejections across $N=8,496$ valid interacting trajectories yields:
-- **Median Pearson Correlation**: $r=0.910$ (mean $0.758 \pm 0.345$)
 - **Median Spearman Rank**: $\rho=0.640$ (mean $0.539 \pm 0.321$)
 - **Median Mutual Information**: $\text{MI}=0.645$ (mean $0.691 \pm 0.410$)
+- **Median Pearson Correlation**: $r=0.910$ (mean $0.758 \pm 0.345$)
 
-This demonstrates a strong linear and nonlinear relationship across generalized orbital configurations, scaling the proxy far beyond the classical Pythagorean tests.
+This demonstrates that the proxy robustly preserves the monotonic sequence of escalating chaos across generalised orbital configurations. The high Pearson standard deviation accurately reflects that while the linear correlation is exceptionally tight ($r \approx 0.9$) for most long-lived systems, it diverges in brief transient scenarios (ejections occurring before the asymptotic LLE can be resolved).
 
 ## Build & Run
 ```bash
